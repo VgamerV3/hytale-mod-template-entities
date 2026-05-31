@@ -2,8 +2,7 @@ package net.hytaledepot.templates.mod.entities;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
-import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.math.vector.Vector3f;
+import com.hypixel.hytale.math.vector.Rotation3f;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation;
@@ -21,6 +20,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
+import org.joml.Vector3d;
 
 public final class EntitiesModTemplate {
   private static final String[] PASSIVE_ROLE_HINTS = {
@@ -167,7 +167,7 @@ public final class EntitiesModTemplate {
           }
 
           Vector3d spawnPosition = new Vector3d(transform.getPosition()).add(2.0, 0.0, 2.0);
-          Vector3f spawnRotation = new Vector3f(headRotation.getRotation());
+          Rotation3f spawnRotation = new Rotation3f(headRotation.getRotation());
 
           Pair<Ref<EntityStore>, ?> spawned = npcPlugin.spawnNPC(playerContext.store, passiveRole, null, spawnPosition, spawnRotation);
           if (spawned == null || spawned.left() == null) {

@@ -1,6 +1,5 @@
 package net.hytaledepot.templates.mod.entities;
 
-import com.hypixel.hytale.protocol.GameMode;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
@@ -103,12 +102,12 @@ public final class EntitiesModPlugin extends JavaPlugin {
     private EntitiesModStatusCommand() {
       super("hdentitiesmodstatus", "Shows runtime status for EntitiesModPlugin.");
       setAllowsExtraArguments(true);
-      this.setPermissionGroup(GameMode.Adventure);
+      setPermissionGroups("hytale:Adventurer");
     }
 
     @Override
     protected void executeSync(CommandContext ctx) {
-      String sender = String.valueOf(ctx.sender().getDisplayName());
+      String sender = String.valueOf(ctx.sender().getUsername());
       String line =
           "[EntitiesMod] lifecycle="
               + lifecycle
@@ -129,13 +128,13 @@ public final class EntitiesModPlugin extends JavaPlugin {
     private EntitiesModDemoCommand() {
       super("hdentitiesmoddemo", "Runs a demo action for EntitiesModPlugin.");
       setAllowsExtraArguments(true);
-      this.setPermissionGroup(GameMode.Adventure);
+      setPermissionGroups("hytale:Adventurer");
     }
 
     @Override
     protected void executeSync(CommandContext ctx) {
       String action = parseAction(ctx.getInputString(), "spawn-passive");
-      String sender = String.valueOf(ctx.sender().getDisplayName());
+      String sender = String.valueOf(ctx.sender().getUsername());
 
       String response = service.runAction(ctx, sender, action, heartbeatTicks.get());
       ctx.sendMessage(Message.raw(response));
